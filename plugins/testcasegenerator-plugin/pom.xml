@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.crawljax.plugins</groupId>
 		<artifactId>crawljax-plugins-parent</artifactId>
-		<version>5.2.4-SNAPSHOT</version>
+		<version>5.2.5</version>
 	</parent>
 
 	<artifactId>testcasegenerator</artifactId>
@@ -97,7 +97,7 @@
 			<artifactId>testng</artifactId>
 			<version>7.8.0</version>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>

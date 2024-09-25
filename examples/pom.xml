@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.crawljax</groupId>
 		<artifactId>crawljax-parent-pom</artifactId>
-		<version>5.2.4-SNAPSHOT</version>
+		<version>5.2.5</version>
 	</parent>
 	<artifactId>crawljax-examples</artifactId>
 	<name>Crawljax Examples</name>
@@ -71,34 +71,34 @@
 					</execution>
 				</executions>
 			</plugin> -->
-			    <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.4.1</version>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.crawljax.examples.FragCrawlExample</mainClass>
-                        </manifest>
-                    </archive>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>com.crawljax.examples.FragCrawlExample</mainClass>
+						</manifest>
+					</archive>
 
-                </configuration>
-                <!--enable if you want to build a jar with all dependencies -->
-								<!--
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                -->
-            </plugin>
-			
+				</configuration>
+				<!--enable if you want to build a jar with all dependencies -->
+				<!--
+<executions>
+    <execution>
+        <id>make-assembly</id>
+        <phase>package</phase>
+        <goals>
+            <goal>single</goal>
+        </goals>
+    </execution>
+</executions>
+-->
+			</plugin>
+
 		</plugins>
 	</build>
 

@@ -62,7 +62,6 @@ public class BrowserProvider extends ExternalResource {
             case FIREFOX_HEADLESS:
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.setCapability("marionette", true);
-                firefoxOptions.setHeadless(true);
                 wdm = WebDriverManager.firefoxdriver();
                 wdm.capabilities(firefoxOptions);
                 driver = (RemoteWebDriver) wdm.create();

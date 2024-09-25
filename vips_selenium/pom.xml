@@ -3,7 +3,7 @@
     <parent>
         <artifactId>crawljax-parent-pom</artifactId>
         <groupId>com.crawljax</groupId>
-        <version>5.2.4-SNAPSHOT</version>
+        <version>5.2.5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -71,6 +71,12 @@
             <artifactId>jwarc</artifactId>
             <version>0.21.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.11.0</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
