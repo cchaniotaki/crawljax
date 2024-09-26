@@ -10,6 +10,7 @@ import io.github.bonigarcia.wdm.config.DriverManagerType;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -178,9 +179,8 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
             firefoxOptions.addArguments("--headless");
         }
 
-        WebDriverManager manager = WebDriverManager.firefoxdriver();
-        manager.capabilities(firefoxOptions);
-        FirefoxDriver driver = (FirefoxDriver) manager.create();
+        WebDriverManager.firefoxdriver().setup();
+        WebDriver driver = new FirefoxDriver(firefoxOptions);
 
         return WebDriverBackedEmbeddedBrowser.withDriver(driver, filterAttributes, crawlWaitReload, crawlWaitEvent);
     }
