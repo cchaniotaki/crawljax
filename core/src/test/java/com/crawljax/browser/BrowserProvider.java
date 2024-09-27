@@ -42,9 +42,10 @@ public class BrowserProvider extends ExternalResource {
      */
     public RemoteWebDriver newBrowser() {
         RemoteWebDriver driver;
+        WebDriverManager wdm;
         switch (getBrowserType()) {
             case CHROME:
-                WebDriverManager wdm = WebDriverManager.chromedriver();
+                wdm = WebDriverManager.chromedriver();
                 wdm.capabilities(createChromeOptions());
                 driver = (RemoteWebDriver) wdm.create();
                 break;
@@ -62,6 +63,7 @@ public class BrowserProvider extends ExternalResource {
             case FIREFOX_HEADLESS:
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.setCapability("marionette", true);
+                firefoxOptions.addArguments("--headless"); // Enable headless mode
                 wdm = WebDriverManager.firefoxdriver();
                 wdm.capabilities(firefoxOptions);
                 driver = (RemoteWebDriver) wdm.create();
@@ -87,6 +89,13 @@ public class BrowserProvider extends ExternalResource {
     private static ChromeOptions createChromeOptions() {
         ChromeOptions optionsChrome = new ChromeOptions();
         optionsChrome.addArguments("--remote-allow-origins=*");
+        optionsChrome.addArguments("--disable-web-security");
+        optionsChrome.addArguments("--allow-running-insecure-content");
+        optionsChrome.addArguments("--disable-gpu");
+        optionsChrome.addArguments("--ignore-certificate-errors");
+        optionsChrome.addArguments("--disable-extensions");
+        optionsChrome.addArguments("--no-sandbox");
+        optionsChrome.addArguments("--disable-dev-shm-usage");
         return optionsChrome;
     }
 

@@ -10,6 +10,7 @@ import io.github.bonigarcia.wdm.config.DriverManagerType;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,6 +19,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.CapabilityType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -123,6 +125,14 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
             edgeOptions.addArguments("disable-gpu");
         }
 
+        edgeOptions.addArguments("--disable-web-security");
+        edgeOptions.addArguments("--allow-running-insecure-content");
+        edgeOptions.addArguments("--disable-gpu");
+        edgeOptions.addArguments("--ignore-certificate-errors");
+        edgeOptions.addArguments("--disable-extensions");
+        edgeOptions.addArguments("--no-sandbox");
+        edgeOptions.addArguments("--disable-dev-shm-usage");
+
         EdgeDriver driver = (EdgeDriver)
                 WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 
@@ -133,6 +143,7 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
             ImmutableSortedSet<String> filterAttributes, long crawlWaitReload, long crawlWaitEvent, boolean headless) {
 
         FirefoxProfile profile = null;
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
 
         if (configuration.getBrowserConfig().getBrowserOptions().getProfile() != null) {
             profile = configuration.getBrowserConfig().getBrowserOptions().getProfile();
@@ -168,10 +179,26 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
                     configuration.getProxyConfiguration().getType().toInt());
             /* use proxy for everything, including localhost */
             profile.setPreference("network.proxy.no_proxies_on", "");
+
+            if (configuration.getProxyConfiguration().getPort() != -1) {
+                Proxy proxy = new Proxy();
+                proxy.setHttpProxy(configuration.getProxyConfiguration().getHostname() + ":"
+                        + configuration.getProxyConfiguration().getPort());
+                proxy.setSslProxy(configuration.getProxyConfiguration().getHostname() + ":"
+                        + configuration.getProxyConfiguration().getPort());
+                firefoxOptions.setCapability(CapabilityType.PROXY, proxy);
+                firefoxOptions.addPreference("security.fileuri.strict_origin_policy", false);
+                firefoxOptions.addPreference("security.csp.enable", false); // Disable Content Security Policy (CSP)
+
+                profile.setPreference("app.update.auto", false);
+                profile.setPreference("app.update.enabled", false);
+                profile.setPreference("dom.webnotifications.enabled", false);
+                profile.setPreference("app.update.silent", true);
+                profile.setPreference("dom.webnotifications.enabled", false);
+                profile.setPreference("dom.disable_beforeunload", true);
+            }
         }
 
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        // firefoxOptions.setCapability("marionette", true);
         firefoxOptions.setProfile(profile);
 
         /* for headless Firefox. */
@@ -194,6 +221,14 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         if (headless) {
             optionsChrome.addArguments("--headless");
         }
+
+        optionsChrome.addArguments("--disable-web-security");
+        optionsChrome.addArguments("--allow-running-insecure-content");
+        optionsChrome.addArguments("--disable-gpu");
+        optionsChrome.addArguments("--ignore-certificate-errors");
+        optionsChrome.addArguments("--disable-extensions");
+        optionsChrome.addArguments("--no-sandbox");
+        optionsChrome.addArguments("--disable-dev-shm-usage");
 
         if (configuration.getProxyConfiguration() != null
                 && configuration.getProxyConfiguration().getType() != ProxyType.NOTHING) {
