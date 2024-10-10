@@ -133,6 +133,21 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         edgeOptions.addArguments("--no-sandbox");
         edgeOptions.addArguments("--disable-dev-shm-usage");
 
+        if (configuration.getProxyConfiguration() != null
+                && configuration.getProxyConfiguration().getType() != ProxyType.NOTHING) {
+
+            String lang = configuration.getBrowserConfig().getLangOrNull();
+            if (!Strings.isNullOrEmpty(lang)) {
+                edgeOptions.addArguments("--lang=" + lang);
+            }
+            edgeOptions.addArguments("--proxy-server=http://"
+                    + configuration.getProxyConfiguration().getHostname() + ":"
+                    + configuration.getProxyConfiguration().getPort());
+        }
+
+        // Issue 587 fix for Chrome 111
+        edgeOptions.addArguments("--remote-allow-origins=*");
+
         EdgeDriver driver = (EdgeDriver)
                 WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 
