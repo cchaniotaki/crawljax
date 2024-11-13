@@ -214,8 +214,6 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
             }
         }
 
-        firefoxOptions.setProfile(profile);
-
         /* for headless Firefox. */
         if (headless) {
             firefoxOptions.addArguments("--headless");
