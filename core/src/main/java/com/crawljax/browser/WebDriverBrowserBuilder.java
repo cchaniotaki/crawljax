@@ -151,6 +151,10 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         EdgeDriver driver = (EdgeDriver)
                 WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 
+        Dimension d = new Dimension(1280, 1024);
+        // Resize current window to the set dimension
+        driver.manage().window().setSize(d);
+
         return WebDriverBackedEmbeddedBrowser.withDriver(driver, filterAttributes, crawlWaitReload, crawlWaitEvent);
     }
 
@@ -222,6 +226,9 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         WebDriverManager.firefoxdriver().setup();
         WebDriver driver = new FirefoxDriver(firefoxOptions);
 
+        Dimension d = new Dimension(1280, 1024);
+        // Resize current window to the set dimension
+        driver.manage().window().setSize(d);
         return WebDriverBackedEmbeddedBrowser.withDriver(driver, filterAttributes, crawlWaitReload, crawlWaitEvent);
     }
 
@@ -262,7 +269,7 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         manager.capabilities(optionsChrome);
         ChromeDriver driverChrome = (ChromeDriver) manager.create();
 
-        Dimension d = new Dimension(1200, 890);
+        Dimension d = new Dimension(1280, 1024);
         // Resize current window to the set dimension
         driverChrome.manage().window().setSize(d);
         return WebDriverBackedEmbeddedBrowser.withDriver(

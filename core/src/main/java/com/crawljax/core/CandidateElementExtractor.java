@@ -314,12 +314,31 @@ public class CandidateElementExtractor {
         return isFileForDownloading(href) || href.startsWith("mailto:") || (!followExternalLinks && isExternal(href));
     }
 
-    private boolean isExternal(String href) {
+    private boolean isExternal(String href) { // TODO christina
         if (href.startsWith("http")) {
             try {
+                // Parse the URL
+                System.out.println("christina: check if external: " + href);
+                System.out.println("siteHostName: " + siteHostName);
                 URI uri = URI.create(href);
-                return !(uri.getHost().toLowerCase().contains(siteHostName.toLowerCase())
-                        || siteHostName.toLowerCase().contains(uri.getHost().toLowerCase()));
+
+                // Get the host and path
+                String uriHost = uri.getHost().toLowerCase();
+                String uriPath = uri.getPath();
+
+                // Check if the host matches
+                if (uriHost.equals(siteHostName.toLowerCase())) {
+                    System.out.println("christina Same domain");
+                    return false; // Same domain
+                }
+
+                // Check if it's a fragment or relative path
+                if (uriHost.equals(siteHostName.toLowerCase()) && uriPath.startsWith("/")) {
+                    System.out.println("christina Same domain");
+                    return false; // Same webpage
+                }
+                System.out.println("christina external domain");
+                return true; // External if not matching the above
             } catch (IllegalArgumentException e) {
                 LOG.info("Unreadable external link {}", href);
             } catch (Exception ex) {

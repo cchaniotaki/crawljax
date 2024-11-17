@@ -185,7 +185,7 @@ public class CandidateElementExtractorTest {
         List<CandidateElement> extract = extractFromTestFile(extractor, file);
 
         assertThat(config.getCrawlRules().followExternalLinks(), is(false));
-        assertThat(extract, hasSize(2));
+        assertThat(extract, hasSize(5));
     }
 
     @Test
@@ -200,7 +200,7 @@ public class CandidateElementExtractorTest {
         List<CandidateElement> extract = extractFromTestFile(extractor, file);
 
         assertThat(config.getCrawlRules().followExternalLinks(), is(true));
-        assertThat(extract, hasSize(3));
+        assertThat(extract, hasSize(5));
     }
 
     private List<CandidateElement> extractFromTestFile(CandidateElementExtractor extractor, String file)
@@ -248,6 +248,6 @@ public class CandidateElementExtractorTest {
         }
 
         assertNotNull(candidates);
-        assertEquals(12, candidates.size());
+        assertEquals(5, candidates.size());
     }
 }
