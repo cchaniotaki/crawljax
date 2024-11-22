@@ -333,8 +333,8 @@ public class CandidateElementExtractor {
                 }
 
                 // Check if it's a fragment or relative path
-                if (uriHost.equals(siteHostName.toLowerCase()) && uriPath.startsWith("/")) {
-                    System.out.println("christina Same domain");
+                if (uriHost.equals(siteHostName.toLowerCase()) && uriPath.startsWith("/#")) {
+                    System.out.println("christina Same domain 2");
                     return false; // Same webpage
                 }
                 System.out.println("christina external domain");
