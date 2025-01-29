@@ -5,8 +5,6 @@ import com.crawljax.core.configuration.ProxyConfiguration.ProxyType;
 import com.crawljax.core.plugin.Plugins;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSortedSet;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.config.DriverManagerType;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.openqa.selenium.Dimension;
@@ -147,9 +145,13 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 
         // Issue 587 fix for Chrome 111
         edgeOptions.addArguments("--remote-allow-origins=*");
-
-        EdgeDriver driver = (EdgeDriver)
-                WebDriverManager.edgedriver().capabilities(edgeOptions).create();
+        // cchaniotaki: add your own path
+        System.setProperty(
+                "webdriver.edge.driver",
+                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver");
+        WebDriver driver = new EdgeDriver(edgeOptions);
+        //    EdgeDriver driver = (EdgeDriver)
+        //          WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 
         Dimension d = new Dimension(1280, 1024);
         // Resize current window to the set dimension
@@ -222,8 +224,12 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         if (headless) {
             firefoxOptions.addArguments("--headless");
         }
-
-        WebDriverManager.firefoxdriver().setup();
+        // chaniotaki
+        System.setProperty(
+                "webdriver.gecko.driver",
+                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
+        //    WebDriver driver = new FirefoxDriver(firefoxOptions);
+        //    WebDriverManager.firefoxdriver().setup();
         WebDriver driver = new FirefoxDriver(firefoxOptions);
 
         Dimension d = new Dimension(1280, 1024);
@@ -264,10 +270,14 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 
         // Issue 587 fix for Chrome 111
         optionsChrome.addArguments("--remote-allow-origins=*");
-
-        WebDriverManager manager = WebDriverManager.getInstance(DriverManagerType.CHROME);
-        manager.capabilities(optionsChrome);
-        ChromeDriver driverChrome = (ChromeDriver) manager.create();
+        System.setProperty(
+                "webdriver.chrome.driver",
+                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
+        //      wdm.capabilities(options);
+        WebDriver driverChrome = new ChromeDriver(optionsChrome);
+        //    WebDriverManager manager = WebDriverManager.getInstance(DriverManagerType.CHROME);
+        //    manager.capabilities(optionsChrome);
+        //    ChromeDriver driverChrome = (ChromeDriver) manager.create();
 
         Dimension d = new Dimension(1280, 1024);
         // Resize current window to the set dimension
