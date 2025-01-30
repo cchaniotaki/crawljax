@@ -1,7 +1,6 @@
 package com.crawljax.examples;
 
 import com.crawljax.util.FSUtils;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +26,9 @@ public class AshotsExample {
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
-        WebDriverManager.firefoxdriver().setup();
+        System.setProperty(
+                "webdriver.gecko.driver",
+                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
 
         FirefoxDriver driver = new FirefoxDriver();
 

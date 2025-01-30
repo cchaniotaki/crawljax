@@ -16,7 +16,6 @@ import com.crawljax.util.DomUtils;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.io.Files;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -366,11 +365,8 @@ public final class WebDriverBackedEmbeddedBrowser implements EmbeddedBrowser {
     }
 
     private void quit() {
-        if (!WebDriverManager.getInstance().getWebDriverList().isEmpty()) {
-            WebDriverManager.getInstance().quit();
-        } else {
-            browser.quit();
-        }
+
+        browser.quit();
     }
 
     private void awaitForCloseTask(CompletableFuture<?> closeTask, int timeoutSeconds) throws InterruptedException {

@@ -6,7 +6,6 @@ import com.crawljax.vips_selenium.DomUtils;
 import com.crawljax.vips_selenium.VipsRectangle;
 import com.crawljax.vips_selenium.VipsSelenium;
 import com.crawljax.vips_selenium.VipsUtils;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -46,13 +45,14 @@ public class VipsSeleniumTests {
             boolean created = TEST_OUTPUT_DIR.mkdir();
             checkArgument(created, "Could not create testOutput dir");
         }
+        System.setProperty(
+                "webdriver.chrome.driver",
+                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
 
-        WebDriverManager wdm = WebDriverManager.chromedriver();
         ChromeOptions optionsChrome = new ChromeOptions();
         optionsChrome.addArguments("--headless");
         optionsChrome.addArguments("--remote-allow-origins=*");
-        wdm.capabilities(optionsChrome);
-        driver = wdm.create();
+        driver = new ChromeDriver(optionsChrome);
     }
 
     private Document getDomTree(WebDriver driver) {
@@ -164,6 +164,6 @@ public class VipsSeleniumTests {
             e.printStackTrace();
         }
         server.stop();
-        WebDriverManager.getInstance().quit();
+        driver.quit();
     }
 }

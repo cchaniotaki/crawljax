@@ -2,12 +2,13 @@ package com.crawljax.browser;
 
 import com.crawljax.browser.EmbeddedBrowser.BrowserType;
 import com.google.common.base.Strings;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.rules.ExternalResource;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -42,31 +43,35 @@ public class BrowserProvider extends ExternalResource {
      */
     public RemoteWebDriver newBrowser() {
         RemoteWebDriver driver;
-        WebDriverManager wdm;
         switch (getBrowserType()) {
             case CHROME:
-                wdm = WebDriverManager.chromedriver();
-                wdm.capabilities(createChromeOptions());
-                driver = (RemoteWebDriver) wdm.create();
+                System.setProperty(
+                        "webdriver.chrome.driver",
+                        "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
+                driver = new ChromeDriver(createChromeOptions());
                 break;
             case CHROME_HEADLESS:
                 ChromeOptions optionsChrome = createChromeOptions();
                 optionsChrome.addArguments("--headless");
-                wdm = WebDriverManager.chromedriver();
-                wdm.capabilities(optionsChrome);
-                driver = (RemoteWebDriver) wdm.create();
+                System.setProperty(
+                        "webdriver.chrome.driver",
+                        "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
+                driver = new ChromeDriver(optionsChrome);
                 break;
             case FIREFOX:
-                wdm = WebDriverManager.firefoxdriver();
-                driver = (RemoteWebDriver) wdm.create();
+                System.setProperty(
+                        "webdriver.gecko.driver",
+                        "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
+                driver = new FirefoxDriver();
                 break;
             case FIREFOX_HEADLESS:
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.setCapability("marionette", true);
                 firefoxOptions.addArguments("--headless"); // Enable headless mode
-                wdm = WebDriverManager.firefoxdriver();
-                wdm.capabilities(firefoxOptions);
-                driver = (RemoteWebDriver) wdm.create();
+                System.setProperty(
+                        "webdriver.gecko.driver",
+                        "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
+                driver = new FirefoxDriver(firefoxOptions);
                 break;
             default:
                 throw new IllegalStateException("Unsupported browser type " + getBrowserType());
@@ -105,7 +110,7 @@ public class BrowserProvider extends ExternalResource {
             try {
                 /* Make sure we clean up properly. */
                 if (!browser.toString().contains("(null)")) {
-                    WebDriverManager.getInstance().quit();
+                    browser.quit();
                 }
 
             } catch (RuntimeException e) {

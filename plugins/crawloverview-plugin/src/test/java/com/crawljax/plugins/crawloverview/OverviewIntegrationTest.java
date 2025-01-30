@@ -9,7 +9,6 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
 import com.crawljax.plugins.crawloverview.model.Statistics;
 import com.google.common.collect.Lists;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -50,7 +49,9 @@ public class OverviewIntegrationTest {
         LOG.info("Jetty started on {}", url);
         LOG.debug("Starting selenium");
 
-        WebDriverManager.chromedriver().setup();
+        System.setProperty(
+                "webdriver.chrome.driver",
+                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
         ChromeOptions optionsChrome = new ChromeOptions();
         optionsChrome.addArguments("--headless", "--disable-gpu", "--window-size=1200x600");
         optionsChrome.addArguments("--remote-allow-origins=*");
