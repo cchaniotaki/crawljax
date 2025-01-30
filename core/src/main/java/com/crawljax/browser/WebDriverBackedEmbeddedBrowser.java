@@ -941,8 +941,10 @@ public final class WebDriverBackedEmbeddedBrowser implements EmbeddedBrowser {
         ChromeDriver chromeDriver = (ChromeDriver) browser;
         Long width = (Long) chromeDriver.executeScript("return document.body.scrollWidth");
         Long height = (Long) chromeDriver.executeScript("return document.body.scrollHeight");
+
         // Correctly handle devicePixelRatio as Double
         Double scale = (Double) chromeDriver.executeScript("return window.devicePixelRatio");
+
         int intscale = scale.intValue();
 
         HashMap<String, Object> setDeviceMetricsOverride = new HashMap<>();

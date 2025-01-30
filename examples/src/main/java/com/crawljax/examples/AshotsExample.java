@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategy;
 import ru.yandex.qatools.ashot.shooting.SimpleShootingStrategy;
 import ru.yandex.qatools.ashot.shooting.ViewportPastingDecorator;
@@ -27,11 +28,11 @@ public class AshotsExample {
     public static void main(String[] args) throws InterruptedException, IOException {
 
         String os = System.getProperty("os.name").toLowerCase();
-
+        FirefoxOptions options = new FirefoxOptions();
         if (os.contains("win")) {
             System.setProperty(
                     "webdriver.gecko.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\geckodriver.exe");
-
+            options.setBinary("C:\\Users\\nikit\\AppData\\Local\\Mozilla Firefox\\firefox.exe");
         } else if (os.contains("mac")) {
             System.setProperty(
                     "webdriver.gecko.driver",
@@ -42,7 +43,9 @@ public class AshotsExample {
         }
         // TODO: add your own path
 
-        FirefoxDriver driver = new FirefoxDriver();
+
+
+        FirefoxDriver driver = new FirefoxDriver(options);
 
         driver.navigate().to("http://testcue.com/crawljax-demo-full/");
         // ((JavascriptExecutor) driver).executeScript("window.resizeTo(1024, 768);");

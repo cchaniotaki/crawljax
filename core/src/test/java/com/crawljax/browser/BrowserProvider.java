@@ -43,12 +43,14 @@ public class BrowserProvider extends ExternalResource {
      */
     public RemoteWebDriver newBrowser() {
         RemoteWebDriver driver;
+        FirefoxOptions foptions = new FirefoxOptions();
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("win")) {
             System.setProperty(
                     "webdriver.edge.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\msedgedriver.exe");
             System.setProperty(
                     "webdriver.gecko.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\geckodriver.exe");
+            foptions.setBinary("C:\\Users\\nikit\\AppData\\Local\\Mozilla Firefox\\firefox.exe");
             System.setProperty(
                     "webdriver.chrome.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe");
 
@@ -79,13 +81,13 @@ public class BrowserProvider extends ExternalResource {
                 driver = new ChromeDriver(optionsChrome);
                 break;
             case FIREFOX:
-                driver = new FirefoxDriver();
+                driver = new FirefoxDriver(foptions);
                 break;
             case FIREFOX_HEADLESS:
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.setCapability("marionette", true);
-                firefoxOptions.addArguments("--headless"); // Enable headless mode
-                driver = new FirefoxDriver(firefoxOptions);
+
+                foptions.setCapability("marionette", true);
+                foptions.addArguments("--headless"); // Enable headless mode
+                driver = new FirefoxDriver(foptions);
                 break;
             default:
                 throw new IllegalStateException("Unsupported browser type " + getBrowserType());

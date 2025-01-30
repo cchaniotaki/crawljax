@@ -82,10 +82,14 @@ public class VipsSeleniumTests {
 
     public BufferedImage getScreenShotAsBufferedImage() {
         ChromeDriver chromeDriver = (ChromeDriver) driver;
-        long width = (long) chromeDriver.executeScript("return document.body.scrollWidth");
-        long height = (long) chromeDriver.executeScript("return document.body.scrollHeight");
-        long scale = (long) chromeDriver.executeScript("return window.devicePixelRatio");
-        int intscale = (int) scale;
+        Long width = (Long) chromeDriver.executeScript("return document.body.scrollWidth");
+        Long height = (Long) chromeDriver.executeScript("return document.body.scrollHeight");
+
+        // Correctly handle devicePixelRatio as Double
+        Double scale = (Double) chromeDriver.executeScript("return window.devicePixelRatio");
+
+        // Convert to int
+        int intscale = scale.intValue();
 
         HashMap<String, Object> setDeviceMetricsOverride = new HashMap<>();
         setDeviceMetricsOverride.put("deviceScaleFactor", scale);

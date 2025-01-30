@@ -243,6 +243,7 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         if (os.contains("win")) {
             System.setProperty(
                     "webdriver.gecko.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\geckodriver.exe");
+            firefoxOptions.setBinary("C:\\Users\\nikit\\AppData\\Local\\Mozilla Firefox\\firefox.exe");
 
         } else if (os.contains("mac")) {
             System.setProperty(
