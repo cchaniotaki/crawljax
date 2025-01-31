@@ -43,8 +43,6 @@ public class AshotsExample {
         }
         // TODO: add your own path
 
-
-
         FirefoxDriver driver = new FirefoxDriver(options);
 
         driver.navigate().to("http://testcue.com/crawljax-demo-full/");

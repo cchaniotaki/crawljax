@@ -84,7 +84,6 @@ public class BrowserProvider extends ExternalResource {
                 driver = new FirefoxDriver(foptions);
                 break;
             case FIREFOX_HEADLESS:
-
                 foptions.setCapability("marionette", true);
                 foptions.addArguments("--headless"); // Enable headless mode
                 driver = new FirefoxDriver(foptions);
