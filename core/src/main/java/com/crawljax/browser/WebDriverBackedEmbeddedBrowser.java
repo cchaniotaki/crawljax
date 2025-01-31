@@ -939,35 +939,68 @@ public final class WebDriverBackedEmbeddedBrowser implements EmbeddedBrowser {
             throw new IllegalStateException("CDP is not enabled but CDP screenshot called");
         }
         ChromeDriver chromeDriver = (ChromeDriver) browser;
-        Long width = (Long) chromeDriver.executeScript("return document.body.scrollWidth");
-        Long height = (Long) chromeDriver.executeScript("return document.body.scrollHeight");
+        String os = System.getProperty("os.name").toLowerCase();
 
-        // Correctly handle devicePixelRatio as Double
-        Double scale = (Double) chromeDriver.executeScript("return window.devicePixelRatio");
+        if (os.contains("win") || os.contains("nix") || os.contains("nux") || os.contains("aix")) {
 
-        int intscale = scale.intValue();
+            Long width = (Long) chromeDriver.executeScript("return document.body.scrollWidth");
+            Long height = (Long) chromeDriver.executeScript("return document.body.scrollHeight");
 
-        HashMap<String, Object> setDeviceMetricsOverride = new HashMap<>();
-        setDeviceMetricsOverride.put("deviceScaleFactor", scale);
-        setDeviceMetricsOverride.put("mobile", false);
-        setDeviceMetricsOverride.put("width", width);
-        setDeviceMetricsOverride.put("height", height);
-        chromeDriver.executeCdpCommand("Emulation.setDeviceMetricsOverride", setDeviceMetricsOverride);
+            // Correctly handle devicePixelRatio as Double
+            Double scale = (Double) chromeDriver.executeScript("return window.devicePixelRatio");
 
-        Map<String, Object> result = chromeDriver.executeCdpCommand("Page.captureScreenshot", new HashMap<>());
-        String data = (String) result.get("data");
-        byte[] image = Base64.getDecoder().decode((data));
-        InputStream is = new ByteArrayInputStream(image);
-        try {
-            BufferedImage img = ImageIO.read(is);
-            BufferedImage resizedImage = new BufferedImage(
-                    img.getWidth() / intscale, img.getHeight() / intscale, BufferedImage.TYPE_INT_RGB);
-            Graphics2D g = resizedImage.createGraphics();
-            g.drawImage(img, 0, 0, img.getWidth() / intscale, img.getHeight() / intscale, Color.WHITE, null);
-            g.dispose();
-            return resizedImage;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            int intscale = scale.intValue();
+
+            HashMap<String, Object> setDeviceMetricsOverride = new HashMap<>();
+            setDeviceMetricsOverride.put("deviceScaleFactor", scale);
+            setDeviceMetricsOverride.put("mobile", false);
+            setDeviceMetricsOverride.put("width", width);
+            setDeviceMetricsOverride.put("height", height);
+            chromeDriver.executeCdpCommand("Emulation.setDeviceMetricsOverride", setDeviceMetricsOverride);
+
+            Map<String, Object> result = chromeDriver.executeCdpCommand("Page.captureScreenshot", new HashMap<>());
+            String data = (String) result.get("data");
+            byte[] image = Base64.getDecoder().decode((data));
+            InputStream is = new ByteArrayInputStream(image);
+            try {
+                BufferedImage img = ImageIO.read(is);
+                BufferedImage resizedImage = new BufferedImage(
+                        img.getWidth() / intscale, img.getHeight() / intscale, BufferedImage.TYPE_INT_RGB);
+                Graphics2D g = resizedImage.createGraphics();
+                g.drawImage(img, 0, 0, img.getWidth() / intscale, img.getHeight() / intscale, Color.WHITE, null);
+                g.dispose();
+                return resizedImage;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else { // mac
+            long width = (long) chromeDriver.executeScript("return document.body.scrollWidth");
+            long height = (long) chromeDriver.executeScript("return document.body.scrollHeight");
+            long scale = (long) chromeDriver.executeScript("return window.devicePixelRatio");
+            int intscale = (int) scale;
+
+            HashMap<String, Object> setDeviceMetricsOverride = new HashMap<>();
+            setDeviceMetricsOverride.put("deviceScaleFactor", scale);
+            setDeviceMetricsOverride.put("mobile", false);
+            setDeviceMetricsOverride.put("width", width);
+            setDeviceMetricsOverride.put("height", height);
+            chromeDriver.executeCdpCommand("Emulation.setDeviceMetricsOverride", setDeviceMetricsOverride);
+
+            Map<String, Object> result = chromeDriver.executeCdpCommand("Page.captureScreenshot", new HashMap<>());
+            String data = (String) result.get("data");
+            byte[] image = Base64.getDecoder().decode((data));
+            InputStream is = new ByteArrayInputStream(image);
+            try {
+                BufferedImage img = ImageIO.read(is);
+                BufferedImage resizedImage = new BufferedImage(
+                        img.getWidth() / intscale, img.getHeight() / intscale, BufferedImage.TYPE_INT_RGB);
+                Graphics2D g = resizedImage.createGraphics();
+                g.drawImage(img, 0, 0, img.getWidth() / intscale, img.getHeight() / intscale, Color.WHITE, null);
+                g.dispose();
+                return resizedImage;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
