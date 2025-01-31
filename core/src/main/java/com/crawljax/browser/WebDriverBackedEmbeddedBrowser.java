@@ -941,7 +941,7 @@ public final class WebDriverBackedEmbeddedBrowser implements EmbeddedBrowser {
         ChromeDriver chromeDriver = (ChromeDriver) browser;
         String os = System.getProperty("os.name").toLowerCase();
 
-        if (os.contains("win") || os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+        if (os.contains("win")) {
 
             Long width = (Long) chromeDriver.executeScript("return document.body.scrollWidth");
             Long height = (Long) chromeDriver.executeScript("return document.body.scrollHeight");
