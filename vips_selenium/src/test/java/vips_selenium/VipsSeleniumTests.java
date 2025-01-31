@@ -45,9 +45,21 @@ public class VipsSeleniumTests {
             boolean created = TEST_OUTPUT_DIR.mkdir();
             checkArgument(created, "Could not create testOutput dir");
         }
-        System.setProperty(
-                "webdriver.chrome.driver",
-                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.contains("win")) {
+            System.setProperty(
+                    "webdriver.chrome.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe");
+
+        } else if (os.contains("mac")) {
+            System.setProperty(
+                    "webdriver.chrome.driver",
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
+
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            System.setProperty("webdriver.chrome.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver");
+        }
+        // TODO: add your own path
 
         ChromeOptions optionsChrome = new ChromeOptions();
         optionsChrome.addArguments("--headless");

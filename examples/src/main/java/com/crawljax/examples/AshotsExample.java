@@ -26,9 +26,21 @@ public class AshotsExample {
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
-        System.setProperty(
-                "webdriver.gecko.driver",
-                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.contains("win")) {
+            System.setProperty(
+                    "webdriver.gecko.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\geckodriver.exe");
+
+        } else if (os.contains("mac")) {
+            System.setProperty(
+                    "webdriver.gecko.driver",
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
+
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            System.setProperty("webdriver.gecko.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/geckodriver");
+        }
+        // TODO: add your own path
 
         FirefoxDriver driver = new FirefoxDriver();
 

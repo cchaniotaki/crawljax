@@ -43,34 +43,48 @@ public class BrowserProvider extends ExternalResource {
      */
     public RemoteWebDriver newBrowser() {
         RemoteWebDriver driver;
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            System.setProperty(
+                    "webdriver.edge.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\msedgedriver.exe");
+            System.setProperty(
+                    "webdriver.gecko.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\geckodriver.exe");
+            System.setProperty(
+                    "webdriver.chrome.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe");
+
+        } else if (os.contains("mac")) {
+            System.setProperty(
+                    "webdriver.edge.driver",
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver");
+            System.setProperty(
+                    "webdriver.gecko.driver",
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
+            System.setProperty(
+                    "webdriver.chrome.driver",
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
+
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            System.setProperty("webdriver.edge.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/msedgedriver");
+            System.setProperty("webdriver.gecko.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/geckodriver");
+            System.setProperty("webdriver.chrome.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver");
+        }
+        // TODO: add your own path
         switch (getBrowserType()) {
             case CHROME:
-                System.setProperty(
-                        "webdriver.chrome.driver",
-                        "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
                 driver = new ChromeDriver(createChromeOptions());
                 break;
             case CHROME_HEADLESS:
                 ChromeOptions optionsChrome = createChromeOptions();
                 optionsChrome.addArguments("--headless");
-                System.setProperty(
-                        "webdriver.chrome.driver",
-                        "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
                 driver = new ChromeDriver(optionsChrome);
                 break;
             case FIREFOX:
-                System.setProperty(
-                        "webdriver.gecko.driver",
-                        "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
                 driver = new FirefoxDriver();
                 break;
             case FIREFOX_HEADLESS:
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.setCapability("marionette", true);
                 firefoxOptions.addArguments("--headless"); // Enable headless mode
-                System.setProperty(
-                        "webdriver.gecko.driver",
-                        "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
             default:

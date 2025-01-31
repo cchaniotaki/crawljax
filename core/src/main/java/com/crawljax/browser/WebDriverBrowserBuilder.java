@@ -145,10 +145,23 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 
         // Issue 587 fix for Chrome 111
         edgeOptions.addArguments("--remote-allow-origins=*");
-        // cchaniotaki: add your own path
-        System.setProperty(
-                "webdriver.edge.driver",
-                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver");
+
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.contains("win")) {
+            System.setProperty(
+                    "webdriver.edge.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\msedgedriver.exe");
+
+        } else if (os.contains("mac")) {
+            System.setProperty(
+                    "webdriver.edge.driver",
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver");
+
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            System.setProperty("webdriver.edge.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/msedgedriver");
+        }
+        // TODO: add your own path
+
         WebDriver driver = new EdgeDriver(edgeOptions);
         //    EdgeDriver driver = (EdgeDriver)
         //          WebDriverManager.edgedriver().capabilities(edgeOptions).create();
@@ -224,10 +237,23 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         if (headless) {
             firefoxOptions.addArguments("--headless");
         }
-        // chaniotaki
-        System.setProperty(
-                "webdriver.gecko.driver",
-                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
+        //
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.contains("win")) {
+            System.setProperty(
+                    "webdriver.gecko.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\geckodriver.exe");
+
+        } else if (os.contains("mac")) {
+            System.setProperty(
+                    "webdriver.gecko.driver",
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
+
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            System.setProperty("webdriver.gecko.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/geckodriver");
+        }
+        // TODO: add your own path
+
         //    WebDriver driver = new FirefoxDriver(firefoxOptions);
         //    WebDriverManager.firefoxdriver().setup();
         WebDriver driver = new FirefoxDriver(firefoxOptions);
@@ -270,9 +296,22 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 
         // Issue 587 fix for Chrome 111
         optionsChrome.addArguments("--remote-allow-origins=*");
-        System.setProperty(
-                "webdriver.chrome.driver",
-                "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.contains("win")) {
+            System.setProperty(
+                    "webdriver.chrome.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe");
+
+        } else if (os.contains("mac")) {
+            System.setProperty(
+                    "webdriver.chrome.driver",
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
+
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            System.setProperty("webdriver.chrome.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver");
+        }
+        // TODO: add your own path
+
         //      wdm.capabilities(options);
         WebDriver driverChrome = new ChromeDriver(optionsChrome);
         //    WebDriverManager manager = WebDriverManager.getInstance(DriverManagerType.CHROME);
