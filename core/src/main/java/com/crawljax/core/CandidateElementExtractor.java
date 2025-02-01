@@ -119,7 +119,7 @@ public class CandidateElementExtractor {
         LOG.debug("Looking in state: {} for candidate elements", currentState.getName());
 
         try {
-            //			Document dom = DomUtils.asDocument(browser.getStrippedDomWithoutIframeContent());
+            //            Document dom = DomUtils.asDocument(browser.getStrippedDomWithoutIframeContent());
             Document dom = currentState.getDocument();
             extractElements(dom, results, "");
         } catch (IOException e) {

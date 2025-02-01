@@ -26,6 +26,7 @@ import com.crawljax.stateabstractions.dom.RTEDStateVertexFactory;
 import com.crawljax.test.BrowserTest;
 import com.crawljax.test.RunWithWebServer;
 import com.crawljax.util.DomUtils;
+import com.crawljax.util.UrlUtils;
 import com.google.common.io.Resources;
 import java.io.IOException;
 import java.net.URI;
@@ -181,7 +182,7 @@ public class CandidateElementExtractorTest {
         CrawljaxConfiguration config = builder.build();
         CandidateElementExtractor extractor = newElementExtractor(config, true);
         String file = "/candidateElementExtractorTest/domWithOneExternalAndTwoInternal.html";
-
+        UrlUtils.openFile(file);
         List<CandidateElement> extract = extractFromTestFile(extractor, file);
 
         assertThat(config.getCrawlRules().followExternalLinks(), is(false));
@@ -196,7 +197,7 @@ public class CandidateElementExtractorTest {
         CrawljaxConfiguration config = builder.build();
         CandidateElementExtractor extractor = newElementExtractor(config, true);
         String file = "/candidateElementExtractorTest/domWithOneExternalAndTwoInternal.html";
-
+        UrlUtils.openFile(file);
         List<CandidateElement> extract = extractFromTestFile(extractor, file);
 
         assertThat(config.getCrawlRules().followExternalLinks(), is(true));
@@ -207,7 +208,11 @@ public class CandidateElementExtractorTest {
             throws URISyntaxException {
         StateVertex currentState = Mockito.mock(StateVertex.class);
         URL dom = Resources.getResource(getClass(), file);
+        UrlUtils.openFile(dom.toURI().toString());
         browser.goToUrl(dom.toURI());
+        System.out.println(dom.toURI());
+        System.out.println(browser.getCurrentUrl());
+        System.out.println(browser.getStrippedDom());
         currentState = new DefaultStateVertexFactory()
                 .createIndex(browser.getCurrentUrl(), browser.getStrippedDom(), browser.getStrippedDom(), browser);
         return extractor.extract(currentState);
@@ -241,6 +246,7 @@ public class CandidateElementExtractorTest {
         CandidateElementExtractor extractor = newElementExtractor(config, true);
 
         String file = "/candidateElementExtractorTest/domWithFourTypeDownloadLink.html";
+
         List<CandidateElement> candidates = extractFromTestFile(extractor, file);
 
         for (CandidateElement e : candidates) {

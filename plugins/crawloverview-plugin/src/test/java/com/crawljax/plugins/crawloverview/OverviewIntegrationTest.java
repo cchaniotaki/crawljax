@@ -67,6 +67,8 @@ public class OverviewIntegrationTest {
         ChromeOptions optionsChrome = new ChromeOptions();
         optionsChrome.addArguments("--headless", "--disable-gpu", "--window-size=1200x600");
         optionsChrome.addArguments("--remote-allow-origins=*");
+        optionsChrome.addArguments("--allow-file-access-from-files");
+        optionsChrome.addArguments("--disable-web-security");
         driver = new ChromeDriver(optionsChrome);
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

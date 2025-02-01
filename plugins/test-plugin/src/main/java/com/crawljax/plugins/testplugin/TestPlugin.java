@@ -6,6 +6,7 @@ import com.crawljax.core.plugin.HostInterface;
 import com.crawljax.core.plugin.OnNewStatePlugin;
 import com.crawljax.core.plugin.PreCrawlingPlugin;
 import com.crawljax.core.state.StateVertex;
+import com.crawljax.util.UrlUtils;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class TestPlugin implements OnNewStatePlugin, PreCrawlingPlugin {
             File file = new File(
                     hostInterface.getOutputDirectory(),
                     context.getCurrentState().getName() + ".html");
-
+            UrlUtils.openFile(context.getCurrentState().getName() + ".html");
             FileWriter fw = new FileWriter(file, false);
             fw.write(dom);
             fw.close();

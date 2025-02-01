@@ -282,6 +282,8 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         optionsChrome.addArguments("--disable-extensions");
         optionsChrome.addArguments("--no-sandbox");
         optionsChrome.addArguments("--disable-dev-shm-usage");
+        optionsChrome.addArguments("--allow-file-access-from-files");
+        optionsChrome.addArguments("--disable-web-security");
 
         if (configuration.getProxyConfiguration() != null
                 && configuration.getProxyConfiguration().getType() != ProxyType.NOTHING) {

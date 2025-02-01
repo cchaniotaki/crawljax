@@ -1341,4 +1341,28 @@ public class VipsUtils {
         any,
         js
     }
+
+    public static void openFile(String file) {
+        try {
+            // Detect OS and open the file with the default browser using the CLI
+            String os = System.getProperty("os.name").toLowerCase();
+            Process process = null;
+
+            if (os.contains("win")) {
+                process = new ProcessBuilder("cmd", "/c", "start", file).start();
+            } else if (os.contains("mac")) {
+                process = new ProcessBuilder("open", file).start();
+            } else if (os.contains("nix") || os.contains("nux") || os.contains("linux")) {
+                process = new ProcessBuilder("xdg-open", file).start();
+            } else {
+                System.out.println("Unsupported OS: " + os);
+            }
+
+            if (process != null) {
+                process.waitFor();
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

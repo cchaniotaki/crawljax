@@ -78,6 +78,8 @@ public class BrowserProvider extends ExternalResource {
             case CHROME_HEADLESS:
                 ChromeOptions optionsChrome = createChromeOptions();
                 optionsChrome.addArguments("--headless");
+                optionsChrome.addArguments("--disable-web-security");
+                optionsChrome.addArguments("--allow-file-access-from-files");
                 driver = new ChromeDriver(optionsChrome);
                 break;
             case FIREFOX:
@@ -116,6 +118,8 @@ public class BrowserProvider extends ExternalResource {
         optionsChrome.addArguments("--disable-extensions");
         optionsChrome.addArguments("--no-sandbox");
         optionsChrome.addArguments("--disable-dev-shm-usage");
+        optionsChrome.addArguments("--allow-file-access-from-files");
+        optionsChrome.addArguments("--disable-web-security");
         return optionsChrome;
     }
 

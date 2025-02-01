@@ -175,7 +175,9 @@ public class VipsSeleniumTests {
     @Test
     public void testOutput() throws URISyntaxException, MalformedURLException, InterruptedException {
         startServer("petclinic");
-        URI url1 = getUrl("/replay/20230128041350/http://host.docker.internal:9966/petclinic/owners/2.html");
+        String file = "/replay/20230128041350/http://host.docker.internal:9966/petclinic/owners/2.html";
+        VipsUtils.openFile(file);
+        URI url1 = getUrl(file);
 
         driver.navigate().to(url1.toURL());
         Thread.sleep(2000);
