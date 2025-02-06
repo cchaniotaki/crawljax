@@ -1,6 +1,7 @@
 package com.crawljax.examples;
 
 import com.crawljax.util.FSUtils;
+import com.crawljax.util.UrlUtils;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -29,20 +30,9 @@ public class AshotsExample {
 
         String os = System.getProperty("os.name").toLowerCase();
         FirefoxOptions options = new FirefoxOptions();
-        if (os.contains("win")) {
-            System.setProperty(
-                    "webdriver.gecko.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\geckodriver.exe");
-            options.setBinary("C:\\Users\\nikit\\AppData\\Local\\Mozilla Firefox\\firefox.exe");
-        } else if (os.contains("mac")) {
-            System.setProperty(
-                    "webdriver.gecko.driver",
-                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
 
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            System.setProperty("webdriver.gecko.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/geckodriver");
-        }
-        // TODO: add your own path
-
+        System.setProperty("webdriver.gecko.driver", UrlUtils.gecko_driver);
+        options.setBinary(UrlUtils.firefox_binary);
         FirefoxDriver driver = new FirefoxDriver(options);
 
         driver.navigate().to("http://testcue.com/crawljax-demo-full/");

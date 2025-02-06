@@ -3,6 +3,7 @@ package com.crawljax.browser;
 import com.crawljax.core.configuration.CrawljaxConfiguration;
 import com.crawljax.core.configuration.ProxyConfiguration.ProxyType;
 import com.crawljax.core.plugin.Plugins;
+import com.crawljax.util.UrlUtils;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSortedSet;
 import javax.inject.Inject;
@@ -148,23 +149,10 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 
         String os = System.getProperty("os.name").toLowerCase();
 
-        if (os.contains("win")) {
-            System.setProperty(
-                    "webdriver.edge.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\msedgedriver.exe");
-
-        } else if (os.contains("mac")) {
-            System.setProperty(
-                    "webdriver.edge.driver",
-                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver");
-
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            System.setProperty("webdriver.edge.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/msedgedriver");
-        }
-        // TODO: add your own path
+        System.setProperty("webdriver.edge.driver", UrlUtils.edge_driver);
+        edgeOptions.setBinary(UrlUtils.edge_binary);
 
         WebDriver driver = new EdgeDriver(edgeOptions);
-        //    EdgeDriver driver = (EdgeDriver)
-        //          WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 
         Dimension d = new Dimension(1280, 1024);
         // Resize current window to the set dimension
@@ -239,24 +227,9 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         }
         //
         String os = System.getProperty("os.name").toLowerCase();
+        System.setProperty("webdriver.gecko.driver", UrlUtils.gecko_driver);
+        firefoxOptions.setBinary(UrlUtils.firefox_binary);
 
-        if (os.contains("win")) {
-            System.setProperty(
-                    "webdriver.gecko.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\geckodriver.exe");
-            firefoxOptions.setBinary("C:\\Users\\nikit\\AppData\\Local\\Mozilla Firefox\\firefox.exe");
-
-        } else if (os.contains("mac")) {
-            System.setProperty(
-                    "webdriver.gecko.driver",
-                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
-
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            System.setProperty("webdriver.gecko.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/geckodriver");
-        }
-        // TODO: add your own path
-
-        //    WebDriver driver = new FirefoxDriver(firefoxOptions);
-        //    WebDriverManager.firefoxdriver().setup();
         WebDriver driver = new FirefoxDriver(firefoxOptions);
 
         Dimension d = new Dimension(1280, 1024);
@@ -301,25 +274,10 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
         optionsChrome.addArguments("--remote-allow-origins=*");
         String os = System.getProperty("os.name").toLowerCase();
 
-        if (os.contains("win")) {
-            System.setProperty(
-                    "webdriver.chrome.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", UrlUtils.chrome_driver);
+        optionsChrome.setBinary(UrlUtils.chrome_binary);
 
-        } else if (os.contains("mac")) {
-            System.setProperty(
-                    "webdriver.chrome.driver",
-                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
-
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            System.setProperty("webdriver.chrome.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver");
-        }
-        // TODO: add your own path
-
-        //      wdm.capabilities(options);
         WebDriver driverChrome = new ChromeDriver(optionsChrome);
-        //    WebDriverManager manager = WebDriverManager.getInstance(DriverManagerType.CHROME);
-        //    manager.capabilities(optionsChrome);
-        //    ChromeDriver driverChrome = (ChromeDriver) manager.create();
 
         Dimension d = new Dimension(1280, 1024);
         // Resize current window to the set dimension

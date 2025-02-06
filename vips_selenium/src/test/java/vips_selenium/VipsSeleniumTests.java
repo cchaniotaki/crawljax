@@ -30,8 +30,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.w3c.dom.Document;
+// import com.crawljax.util.UrlUtils;
 
 public class VipsSeleniumTests {
+
+    // MAC
+    public static String chrome_binary =
+            "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/chrome_131.0.6778.205.app/Contents/MacOS/Google Chrome";
+    public static String chrome_driver =
+            "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver";
+
+    // WINDOWS
+    //    public static String chrome_binary = "";
+    //    public static String chrome_driver = "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe";
+
+    // LNUX
+    //    public static String chrome_binary = "";
+    //    public static String chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
 
     WarchiveServer server;
 
@@ -45,25 +60,12 @@ public class VipsSeleniumTests {
             boolean created = TEST_OUTPUT_DIR.mkdir();
             checkArgument(created, "Could not create testOutput dir");
         }
-        String os = System.getProperty("os.name").toLowerCase();
-
-        if (os.contains("win")) {
-            System.setProperty(
-                    "webdriver.chrome.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe");
-
-        } else if (os.contains("mac")) {
-            System.setProperty(
-                    "webdriver.chrome.driver",
-                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
-
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            System.setProperty("webdriver.chrome.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver");
-        }
-        // TODO: add your own path
+        System.setProperty("webdriver.chrome.driver", chrome_driver);
 
         ChromeOptions optionsChrome = new ChromeOptions();
         optionsChrome.addArguments("--headless");
         optionsChrome.addArguments("--remote-allow-origins=*");
+        optionsChrome.setBinary(chrome_binary);
         driver = new ChromeDriver(optionsChrome);
     }
 
@@ -187,7 +189,7 @@ public class VipsSeleniumTests {
 
         VipsSelenium vips = new VipsSelenium(driver, dom, screenshot, 10, TEST_OUTPUT_DIR, "state1", true, false);
         List<VipsRectangle> rectangles = vips.startSegmentation();
-
+        System.out.println(dom);
         // Number of fragments with the highest number of iterations
         Assert.assertEquals(41, rectangles.size());
 

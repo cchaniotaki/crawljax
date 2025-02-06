@@ -5,6 +5,36 @@ import java.net.URI;
 
 public class UrlUtils {
 
+    // MAC
+    public static String firefox_binary =
+            "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/Firefox_135.0.app/Contents/MacOS/firefox";
+    public static String chrome_binary =
+            "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/chrome_131.0.6778.205.app/Contents/MacOS/Google Chrome";
+    public static String edge_binary =
+            "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/Edge_132.0.2957.140.app/Contents/MacOS/Microsoft Edge";
+    public static String gecko_driver =
+            "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver";
+    public static String chrome_driver =
+            "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver";
+    public static String edge_driver =
+            "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver";
+
+    // WINDOWS
+    //    public static String firefox_binary = "C:\\Users\\nikit\\AppData\\Local\\Mozilla Firefox\\firefox.exe";
+    //    public static String chrome_binary = "";
+    //    public static String edge_binary = "";
+    //    public static String gecko_driver = "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\geckodriver.exe";
+    //    public static String chrome_driver = "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe";
+    //    public static String edge_driver = "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\msedgedriver.exe";
+
+    // LNUX
+    //    public static String firefox_binary = "";
+    //    public static String chrome_binary = "";
+    //    public static String edge_binary = "";
+    //    public static String gecko_driver = "";
+    //    public static String chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
+    //    public static String edge_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/msedgedriver";
+
     private UrlUtils() {}
 
     public static void openFile(String file) {

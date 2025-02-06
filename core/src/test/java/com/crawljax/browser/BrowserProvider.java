@@ -1,6 +1,7 @@
 package com.crawljax.browser;
 
 import com.crawljax.browser.EmbeddedBrowser.BrowserType;
+import com.crawljax.util.UrlUtils;
 import com.google.common.base.Strings;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,39 +45,17 @@ public class BrowserProvider extends ExternalResource {
     public RemoteWebDriver newBrowser() {
         RemoteWebDriver driver;
         FirefoxOptions foptions = new FirefoxOptions();
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")) {
-            System.setProperty(
-                    "webdriver.edge.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\msedgedriver.exe");
-            System.setProperty(
-                    "webdriver.gecko.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\geckodriver.exe");
-            foptions.setBinary("C:\\Users\\nikit\\AppData\\Local\\Mozilla Firefox\\firefox.exe");
-            System.setProperty(
-                    "webdriver.chrome.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe");
+        ChromeOptions optionsChrome = createChromeOptions();
+        System.setProperty("webdriver.gecko.driver", UrlUtils.gecko_driver);
+        System.setProperty("webdriver.chrome.driver", UrlUtils.chrome_driver);
+        foptions.setBinary(UrlUtils.firefox_binary);
+        optionsChrome.setBinary(UrlUtils.chrome_binary);
 
-        } else if (os.contains("mac")) {
-            System.setProperty(
-                    "webdriver.edge.driver",
-                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver");
-            System.setProperty(
-                    "webdriver.gecko.driver",
-                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver");
-            System.setProperty(
-                    "webdriver.chrome.driver",
-                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
-
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            System.setProperty("webdriver.edge.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/msedgedriver");
-            System.setProperty("webdriver.gecko.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/geckodriver");
-            System.setProperty("webdriver.chrome.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver");
-        }
-        // TODO: add your own path
         switch (getBrowserType()) {
             case CHROME:
                 driver = new ChromeDriver(createChromeOptions());
                 break;
             case CHROME_HEADLESS:
-                ChromeOptions optionsChrome = createChromeOptions();
                 optionsChrome.addArguments("--headless");
                 optionsChrome.addArguments("--disable-web-security");
                 optionsChrome.addArguments("--allow-file-access-from-files");

@@ -8,6 +8,7 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 import com.crawljax.plugins.crawloverview.model.Statistics;
+import com.crawljax.util.UrlUtils;
 import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
@@ -50,25 +51,14 @@ public class OverviewIntegrationTest {
         LOG.debug("Starting selenium");
 
         String os = System.getProperty("os.name").toLowerCase();
+        System.setProperty("webdriver.chrome.driver", UrlUtils.chrome_driver);
 
-        if (os.contains("win")) {
-            System.setProperty(
-                    "webdriver.chrome.driver", "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe");
-
-        } else if (os.contains("mac")) {
-            System.setProperty(
-                    "webdriver.chrome.driver",
-                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver");
-
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            System.setProperty("webdriver.chrome.driver", "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver");
-        }
-        // TODO: add your own path
         ChromeOptions optionsChrome = new ChromeOptions();
         optionsChrome.addArguments("--headless", "--disable-gpu", "--window-size=1200x600");
         optionsChrome.addArguments("--remote-allow-origins=*");
         optionsChrome.addArguments("--allow-file-access-from-files");
         optionsChrome.addArguments("--disable-web-security");
+        optionsChrome.setBinary(UrlUtils.chrome_binary);
         driver = new ChromeDriver(optionsChrome);
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
