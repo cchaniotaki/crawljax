@@ -35,14 +35,16 @@ import org.w3c.dom.Document;
 public class VipsSeleniumTests {
 
     // MAC
-    public static String chrome_binary =
-            "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/chrome_131.0.6778.205.app/Contents/MacOS/Google Chrome";
-    public static String chrome_driver =
-            "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver";
+    //     public static String chrome_binary =
+    //
+    // "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/chrome_131.0.6778.205.app/Contents/MacOS/Google Chrome";
+    //     public static String chrome_driver =
+    //             "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver";
 
     // WINDOWS
-    //    public static String chrome_binary = "";
-    //    public static String chrome_driver = "C:\\Users\\nikit\\Desktop\\Krawler\\drivers\\chromedriver.exe";
+    public static String chrome_binary =
+            "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
+    public static String chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
 
     // LNUX
     //    public static String chrome_binary = "";
