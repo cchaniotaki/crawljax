@@ -26,7 +26,7 @@ public class UrlUtils {
     public static String firefox_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\firefox_135.0\\firefox.exe";
     public static String chrome_binary =
             "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
-    public static String edge_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\edge_132.0.2957.140\\edge.exe";
+    public static String edge_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\edge_132.0.2957.140\\msedge.exe";
     public static String gecko_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\geckodriver.exe";
     public static String chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
     public static String edge_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\msedgedriver.exe";
