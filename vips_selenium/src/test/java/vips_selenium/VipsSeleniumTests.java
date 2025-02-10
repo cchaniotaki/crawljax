@@ -33,24 +33,8 @@ import org.w3c.dom.Document;
 // import com.crawljax.util.UrlUtils;
 
 public class VipsSeleniumTests {
-
-    // MAC
-    //     public static String chrome_binary =
-    //
-    // "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/chrome_131.0.6778.205.app/Contents/MacOS/Google Chrome";
-    //     public static String chrome_driver =
-    //             "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver";
-
-    // WINDOWS
-    //    public static String chrome_binary =
-    //            "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
-    //    public static String chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
-
-    // LNUX
-    public static String chrome_binary =
-            "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/chrome_132.0.6824.159/opt/google/chrome/google-chrome";
-    public static String chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
-
+    public static String chrome_binary;
+    public static String chrome_driver;
     WarchiveServer server;
 
     WebDriver driver;
@@ -59,6 +43,22 @@ public class VipsSeleniumTests {
 
     @Before
     public void setup() {
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.indexOf("win") >= 0) {
+            chrome_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
+            chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
+
+        } else if (os.indexOf("mac") >= 0) {
+            chrome_binary =
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/chrome_132.0.6834.160.app/Contents/MacOS/Google Chrome";
+            chrome_driver = "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver";
+        } else {
+            chrome_binary =
+                    "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/chrome_132.0.6824.159/opt/google/chrome/google-chrome";
+           chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
+        }
+
         if (!TEST_OUTPUT_DIR.exists()) {
             boolean created = TEST_OUTPUT_DIR.mkdir();
             checkArgument(created, "Could not create testOutput dir");

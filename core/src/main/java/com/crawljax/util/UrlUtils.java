@@ -5,44 +5,43 @@ import java.net.URI;
 
 public class UrlUtils {
 
-    // MAC
-    //     public static String firefox_binary =
-    //
-    // "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/Firefox_135.0.app/Contents/MacOS/firefox";
-    //     public static String chrome_binary =
-    //
-    // "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/chrome_131.0.6778.205.app/Contents/MacOS/Google Chrome";
-    //     public static String edge_binary =
-    //
-    // "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/Edge_132.0.2957.140.app/Contents/MacOS/Microsoft Edge";
-    //     public static String gecko_driver =
-    //             "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver";
-    //     public static String chrome_driver =
-    //             "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver";
-    //     public static String edge_driver =
-    //             "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver";
+    public static String firefox_binary;
+    public static String chrome_binary;
+    public static String edge_binary;
+    public static String gecko_driver;
+    public static String chrome_driver;
+    public static String edge_driver;
 
-    // WINDOWS
-    //    public static String firefox_binary =
-    // "C:\\Users\\chris\\PycharmProjects\\browsers\\firefox_135.0\\firefox.exe";
-    //    public static String chrome_binary =
-    //            "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
-    //    public static String edge_binary =
-    // "C:\\Users\\chris\\PycharmProjects\\browsers\\edge_132.0.2957.140\\edge.exe";
-    //    public static String gecko_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\geckodriver.exe";
-    //    public static String chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
-    //    public static String edge_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\msedgedriver.exe";
+    static {
+        String os = System.getProperty("os.name").toLowerCase();
+        // You can initialize things here
+        if (os.indexOf("win") >= 0) {
+            firefox_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\firefox_135.0\\firefox.exe";
+            chrome_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
+            edge_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\edge_132.0.2957.140\\msedge.exe";
+            gecko_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\geckodriver.exe";
+            chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
+            edge_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\msedgedriver.exe";
 
-    //     LNUX
-    public static String firefox_binary =
-            "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/firefox_135.0/firefox";
-    public static String chrome_binary =
-            "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/chrome_132.0.6824.159/opt/google/chrome/google-chrome";
-    public static String edge_binary =
-            "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/edge_132.0.2957.140/opt/microsoft/msedge/microsoft-edge";
-    public static String gecko_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/geckodriver";
-    public static String chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
-    public static String edge_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/msedgedriver";
+        } else if (os.indexOf("mac") >= 0) {
+            firefox_binary =
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/Firefox_135.0.app/Contents/MacOS/firefox";
+            chrome_binary =
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/chrome_132.0.6834.160.app/Contents/MacOS/Google Chrome";
+            edge_binary =
+                    "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/browser-executables/Edge_132.0.2957.140.app/Contents/MacOS/Microsoft Edge";
+            gecko_driver = "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/geckodriver";
+            chrome_driver = "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver";
+            edge_driver = "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver";
+        } else {
+            firefox_binary = "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/firefox_135.0/firefox";
+            chrome_binary = "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/chrome_132.0.6824.159/opt/google/chrome/google-chrome";
+            edge_binary = "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/edge_132.0.2957.140/opt/microsoft/msedge/microsoft-edge";
+            gecko_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/geckodriver";
+            chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
+            edge_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/msedgedriver";
+        }
+    }
 
     private UrlUtils() {}
 
