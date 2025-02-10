@@ -23,21 +23,26 @@ public class UrlUtils {
     //             "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver";
 
     // WINDOWS
-    public static String firefox_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\firefox_135.0\\firefox.exe";
-    public static String chrome_binary =
-            "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
-    public static String edge_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\edge_132.0.2957.140\\edge.exe";
-    public static String gecko_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\geckodriver.exe";
-    public static String chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
-    public static String edge_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\msedgedriver.exe";
+    //    public static String firefox_binary =
+    // "C:\\Users\\chris\\PycharmProjects\\browsers\\firefox_135.0\\firefox.exe";
+    //    public static String chrome_binary =
+    //            "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
+    //    public static String edge_binary =
+    // "C:\\Users\\chris\\PycharmProjects\\browsers\\edge_132.0.2957.140\\edge.exe";
+    //    public static String gecko_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\geckodriver.exe";
+    //    public static String chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
+    //    public static String edge_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\msedgedriver.exe";
 
-    // LNUX
-    //    public static String firefox_binary = "";
-    //    public static String chrome_binary = "";
-    //    public static String edge_binary = "";
-    //    public static String gecko_driver = "";
-    //    public static String chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
-    //    public static String edge_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/msedgedriver";
+    //     LNUX
+    public static String firefox_binary =
+            "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/firefox_135.0/firefox";
+    public static String chrome_binary =
+            "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/chrome_132.0.6824.159/opt/google/chrome/google-chrome";
+    public static String edge_binary =
+            "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/edge_132.0.2957.140/opt/microsoft/msedge/microsoft-edge";
+    public static String gecko_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/geckodriver";
+    public static String chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
+    public static String edge_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/msedgedriver";
 
     private UrlUtils() {}
 

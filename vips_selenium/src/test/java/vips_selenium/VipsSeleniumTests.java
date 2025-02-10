@@ -42,13 +42,14 @@ public class VipsSeleniumTests {
     //             "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver";
 
     // WINDOWS
-    public static String chrome_binary =
-            "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
-    public static String chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
+    //    public static String chrome_binary =
+    //            "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
+    //    public static String chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
 
     // LNUX
-    //    public static String chrome_binary = "";
-    //    public static String chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
+    public static String chrome_binary =
+            "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/chrome_132.0.6824.159/opt/google/chrome/google-chrome";
+    public static String chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
 
     WarchiveServer server;
 
