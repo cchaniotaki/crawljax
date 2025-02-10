@@ -34,9 +34,12 @@ public class UrlUtils {
             chrome_driver = "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/chromedriver";
             edge_driver = "/Users/christinechaniotaki/Documents/Krawler-study/krawler-paper/drivers/mac/msedgedriver";
         } else {
-            firefox_binary = "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/firefox_135.0/firefox";
-            chrome_binary = "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/chrome_132.0.6824.159/opt/google/chrome/google-chrome";
-            edge_binary = "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/edge_132.0.2957.140/opt/microsoft/msedge/microsoft-edge";
+            firefox_binary =
+                    "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/firefox_135.0/firefox";
+            chrome_binary =
+                    "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/chrome_132.0.6824.159/opt/google/chrome/google-chrome";
+            edge_binary =
+                    "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/edge_132.0.2957.140/opt/microsoft/msedge/microsoft-edge";
             gecko_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/geckodriver";
             chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
             edge_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/msedgedriver";

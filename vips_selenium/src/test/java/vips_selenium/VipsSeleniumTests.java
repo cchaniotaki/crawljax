@@ -56,7 +56,7 @@ public class VipsSeleniumTests {
         } else {
             chrome_binary =
                     "/home/cchaniot/Desktop/Krawler-Study/krawler-paper/browser-executables/chrome_132.0.6824.159/opt/google/chrome/google-chrome";
-           chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
+            chrome_driver = "/home/cchaniot/Desktop/Krawler-Study/drivers/chromedriver";
         }
 
         if (!TEST_OUTPUT_DIR.exists()) {
