@@ -46,8 +46,8 @@ public class VipsSeleniumTests {
         String os = System.getProperty("os.name").toLowerCase();
 
         if (os.indexOf("win") >= 0) {
-            chrome_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
-            chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
+            chrome_binary = "C:\\Users\\Paul\\Desktop\\Krawler-study\\browsers\\chrome_132.0.6834.160\\chrome.exe";
+            chrome_driver = "C:\\Users\\Paul\\Desktop\\Krawler-study\\drivers\\chromedriver.exe";
 
         } else if (os.indexOf("mac") >= 0) {
             chrome_binary =
@@ -90,14 +90,13 @@ public class VipsSeleniumTests {
         String os = System.getProperty("os.name").toLowerCase();
 
         if (os.contains("win")) {
-            Long width = (Long) chromeDriver.executeScript("return document.body.scrollWidth");
-            Long height = (Long) chromeDriver.executeScript("return document.body.scrollHeight");
-
-            // Correctly handle devicePixelRatio as Double
-            Double scale = (Double) chromeDriver.executeScript("return window.devicePixelRatio");
+            long width = (long) chromeDriver.executeScript("return document.body.scrollWidth");
+            long height = (long) chromeDriver.executeScript("return document.body.scrollHeight");
+            long scale = (long) chromeDriver.executeScript("return window.devicePixelRatio");
+            int intscale = (int) scale;
 
             // Convert to int
-            int intscale = scale.intValue();
+            //            int intscale = scale.intValue();
 
             HashMap<String, Object> setDeviceMetricsOverride = new HashMap<>();
             setDeviceMetricsOverride.put("deviceScaleFactor", scale);

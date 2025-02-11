@@ -16,12 +16,13 @@ public class UrlUtils {
         String os = System.getProperty("os.name").toLowerCase();
         // You can initialize things here
         if (os.indexOf("win") >= 0) {
-            firefox_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\firefox_135.0\\firefox.exe";
-            chrome_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\chrome_132.0.6834.160\\chrome.exe";
-            edge_binary = "C:\\Users\\chris\\PycharmProjects\\browsers\\edge_132.0.2957.140\\msedge.exe";
-            gecko_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\geckodriver.exe";
-            chrome_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\chromedriver.exe";
-            edge_driver = "C:\\Users\\chris\\PycharmProjects\\windows-drivers\\msedgedriver.exe";
+            firefox_binary = "C:\\Users\\Paul\\Desktop\\Krawler-study\\browsers\\firefox_135.0\\firefox.exe";
+            chrome_binary = "C:\\Users\\Paul\\Desktop\\Krawler-study\\browsers\\chrome_132.0.6834.160\\chrome.exe";
+            edge_binary = "C:\\Users\\Paul\\Desktop\\Krawler-study\\browsers\\edge_132.0.2957.140\\msedge.exe";
+
+            gecko_driver = "C:\\Users\\Paul\\Desktop\\Krawler-study\\drivers\\geckodriver.exe";
+            chrome_driver = "C:\\Users\\Paul\\Desktop\\Krawler-study\\drivers\\chromedriver.exe";
+            edge_driver = "C:\\Users\\Paul\\Desktop\\Krawler-study\\drivers\\msedgedriver.exe";
 
         } else if (os.indexOf("mac") >= 0) {
             firefox_binary =
